@@ -1,13 +1,19 @@
 server:
+  #服务端口号
   port: 10003
 eureka:
   instance:
     hostname: localhost
   client:
-    #��ʾ�Ƿ��Լ�ע�ᵽEureka Server��Ĭ��Ϊtrue��
+    #实例是否在eureka服务器上注册自己的信息以提供其他服务发现,默认为true(关闭默认注册到eureka服务中心（该项目本身就是服务中心，无需自己注册自己）)
     registerWithEureka: false
-    #��ʾ�Ƿ��Eureka Server��ȡע����Ϣ��Ĭ��Ϊtrue��
+    #此客户端是否获取eureka服务器注册表上的注册信息,默认为true(关闭自动抓取服务端，该工程本身就是服务端)
     fetchRegistry: false
     serviceUrl:
-      #������Eureka Server�����ĵ�ַ����ѯ�����ע�������Ҫ���������ַ��Ĭ����http://localhost:8761/eureka �������ַ��ʹ�� , �ָ�
+      #设置与Eureka Server交互的地址，查询服务和注册服务都需要依赖这个地址。默认是http://localhost:8761/eureka ；多个地址可使用 , 分隔
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    #关闭自我保护
+    enable-self-preservation: false
+    #清理间隔（单位毫秒，默认是60*1000）
+    eviction-interval-timer-in-ms: 8000
